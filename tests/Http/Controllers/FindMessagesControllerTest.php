@@ -33,11 +33,11 @@ class FindMessagesControllerTest extends TestCase
         $message->save();
     }
 
-    public function testFindMessagesWhenUserExists() : void
+    public function testFindMessagesWhenChannelExists() : void
     {
 
         // given
-        $id = 2;
+        $id = 1;
         $response = '["content":{"messages":[{"channel_id":1,"created_at":null,"id":1,"message":"Hello world","updated_at":null,"user_id":1}]}] within [{"content":{"messages":[]},"error_messages":{"error":[]}}]';
 
         // when
@@ -45,15 +45,17 @@ class FindMessagesControllerTest extends TestCase
 
         // then
         $result->seeStatusCode(Response::HTTP_OK);
-        $result->seeJson($response);
+        $result->seeJson(json_decode($response, true));
     }
 
-    public function testFindMessagesWhenUserNotExists() : void
+    public function testFindMessagesWhenChannelNotExists() : void
     {
 
         // given
-        $id = 1;
-        $response = '[{"content":{"messages":[]},"error_messages":{"error":[]}}]';
+        $id = 2;
+        $response = [
+            'content' => ['messages' => [],], 'error_messages' => ['error' => [],],
+        ];
 
         // when
         $result = $this->get('/messages/'.$id);
