@@ -6,12 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Factories\DatabaseCommandFactory;
 use App\Factories\DatabaseOperationConstants;
+use App\Strategies\CommandStrategies\DeleteInvitationStrategy;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class DeleteInvitationController extends Controller
 {
 
+    /** @var DeleteInvitationStrategy $strategy */
     private $strategy;
 
     public function __construct(DatabaseCommandFactory $databaseCommandFactory)

@@ -6,12 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Factories\DatabaseCommandFactory;
 use App\Factories\DatabaseOperationConstants;
+use App\Strategies\CommandStrategies\UpdateMessageStrategy;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UpdateMessageController extends Controller
 {
 
+    /** @var UpdateMessageStrategy $strategy */
     private $strategy;
 
     public function __construct(DatabaseCommandFactory $databaseCommandFactory)

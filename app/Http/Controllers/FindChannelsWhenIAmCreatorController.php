@@ -6,11 +6,13 @@ namespace App\Http\Controllers;
 
 use App\Factories\DatabaseOperationConstants;
 use App\Factories\DatabaseQueryFactory;
+use App\Strategies\QueryStrategies\FindChannelsWhenIAmCreatorStrategy;
 use Illuminate\Http\JsonResponse;
 
 class FindChannelsWhenIAmCreatorController extends Controller
 {
 
+    /** @var FindChannelsWhenIAmCreatorStrategy $strategy */
     private $strategy;
 
     public function __construct(DatabaseQueryFactory $databaseQueryFactory)

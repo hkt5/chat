@@ -6,12 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Factories\DatabaseCommandFactory;
 use App\Factories\DatabaseOperationConstants;
+use App\Strategies\CommandStrategies\UpdateInvitationStrategy;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UpdateInvitationController extends Controller
 {
 
+    /** @var UpdateInvitationStrategy $strategy */
     private $strategy;
 
     public function __construct(DatabaseCommandFactory $databaseCommandFactory)

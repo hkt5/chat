@@ -6,11 +6,13 @@ namespace App\Http\Controllers;
 
 use App\Factories\DatabaseOperationConstants;
 use App\Factories\DatabaseQueryFactory;
+use App\Strategies\QueryStrategies\FindMessagesStrategy;
 use Illuminate\Http\JsonResponse;
 
 class FindMessagesController extends Controller
 {
 
+    /** @var FindMessagesStrategy $strategy */
     private $strategy;
 
     public function __construct(DatabaseQueryFactory $databaseQueryFactory)
