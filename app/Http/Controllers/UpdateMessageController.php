@@ -21,6 +21,23 @@ class UpdateMessageController extends Controller
         $this->strategy = $databaseCommandFactory->strategy;
     }
 
+    /**
+     * Update message
+     * [Update current message]
+     *
+     * @bodyParam id integer required Id of message.
+     * @bodyParam user_id integer required Id of user.
+     * @bodyParam channel_id integer required Id of channel.
+     * @bodyParam message string required Message.
+     *
+     * @response 200 {"content":{"message":{"id":1,"message":"Hello World","channel_id":1,"user_id":1,"created_at":null,"updated_at":null}},"error_messages":[]}
+     * @response 400 {"content":[],"error_messages":{"id":["The id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"id":["The selected id is invalid."]}}
+     * @response 400 {"content":[],"error_messages":{"user_id":["The user id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The channel id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The selected channel id is invalid."]}}
+     * @response 400 {"content":[],"error_messages":{"message":["The message field is required."]}}
+     */
     public function update(Request $request) : JsonResponse
     {
 

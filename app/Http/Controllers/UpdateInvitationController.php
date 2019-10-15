@@ -21,6 +21,23 @@ class UpdateInvitationController extends Controller
         $this->strategy = $databaseCommandFactory->strategy;
     }
 
+    /**
+     * Update invitation.
+     * [Update current invitation.]
+     *
+     * @bodyParam id integer required Id of invitation.
+     * @bodyParam channel_id integer required Id of channel.
+     * @bodyParam  user_id integer required Id of user.
+     * @bodyPAram confirmed boolean rquired Invitaion confirmation.
+     *
+     * @response 200 {"content":{"invitation":{"id":1,"channel_id":1,"user_id":2,"confirmed":true,"created_at":null,"updated_at":null}},"error_messages":[]}
+     * @response 400 {"content":[],"error_messages":{"id":["The id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"id":["The selected id is invalid."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The channel id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The selected channel id is invalid."]}}
+     * @response 400 {"content":[],"error_messages":{"user_id":["The user id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"confirmed":["The confirmed field is required."]}}
+     */
     public function update(Request $request) : JsonResponse
     {
 

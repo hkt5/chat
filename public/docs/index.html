@@ -150,7 +150,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"name":"omnis","creator_id":5}'
+    -d '{"name":"sed","creator_id":11}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/channels");
 
@@ -160,8 +160,8 @@ let headers = {
 }
 
 let body = {
-    "name": "omnis",
-    "creator_id": 5
+    "name": "sed",
+    "creator_id": 11
 }
 
 fetch(url, {
@@ -231,7 +231,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"channel_id":7,"user_id":15}'
+    -d '{"channel_id":6,"user_id":10}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/invitations");
 
@@ -241,8 +241,8 @@ let headers = {
 }
 
 let body = {
-    "channel_id": 7,
-    "user_id": 15
+    "channel_id": 6,
+    "user_id": 10
 }
 
 fetch(url, {
@@ -313,7 +313,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":4,"channel_id":8}'
+    -d '{"user_id":7,"channel_id":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/messages");
 
@@ -323,8 +323,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 4,
-    "channel_id": 8
+    "user_id": 7,
+    "channel_id": 15
 }
 
 fetch(url, {
@@ -374,80 +374,14 @@ fetch(url, {
 </table>
 <!-- END_c128c06c497a94b3cf48af3efc7a382f -->
 <!-- START_ce903b7ab13a2d1de4efa36802bb3f26 -->
-<h2>/channels</h2>
+<h2>Update channel.</h2>
+<p>[Update current channel.]</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X PUT "/channels" </code></pre>
-<pre><code class="language-javascript">const url = new URL("/channels");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>PUT /channels</code></p>
-<!-- END_ce903b7ab13a2d1de4efa36802bb3f26 -->
-<!-- START_31d75fba9d8e9f5591bfb23b779f1371 -->
-<h2>/invitations</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X PUT "/invitations" </code></pre>
-<pre><code class="language-javascript">const url = new URL("/invitations");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>PUT /invitations</code></p>
-<!-- END_31d75fba9d8e9f5591bfb23b779f1371 -->
-<!-- START_bdf4d69a168f9c742e73c1a726d5236a -->
-<h2>/messages</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X PUT "/messages" </code></pre>
-<pre><code class="language-javascript">const url = new URL("/messages");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>PUT /messages</code></p>
-<!-- END_bdf4d69a168f9c742e73c1a726d5236a -->
-<!-- START_440fc4cfa00fcc2e15ab4815f19c1f55 -->
-<h2>Delete channel.</h2>
-<p>[Delete channel when I am creator.]</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "/channels" \
+<pre><code class="language-bash">curl -X PUT "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"id":14,"creator_id":4}'
+    -d '{"id":3,"name":"aut","creator_id":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/channels");
 
@@ -457,8 +391,289 @@ let headers = {
 }
 
 let body = {
-    "id": 14,
-    "creator_id": 4
+    "id": 3,
+    "name": "aut",
+    "creator_id": 20
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "channel": {
+            "id": 1,
+            "creator_id": 1,
+            "name": "third_channel",
+            "users": null,
+            "created_at": null,
+            "updated_at": "2019-10-15 10:33:28"
+        },
+        "error_messages": null
+    },
+    "0": 200
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "creator_id": [
+            "The creator id field is required."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT /channels</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of channel.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>required</td>
+<td>Name of channel.</td>
+</tr>
+<tr>
+<td>creator_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of creator.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_ce903b7ab13a2d1de4efa36802bb3f26 -->
+<!-- START_31d75fba9d8e9f5591bfb23b779f1371 -->
+<h2>Update invitation.</h2>
+<p>[Update current invitation.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "/invitations" \
+    -H "Content-Type: application/json" \
+    -d '{"id":1,"channel_id":4,"user_id":19}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("/invitations");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 1,
+    "channel_id": 4,
+    "user_id": 19
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "invitation": {
+            "id": 1,
+            "channel_id": 1,
+            "user_id": 2,
+            "confirmed": true,
+            "created_at": null,
+            "updated_at": null
+        }
+    },
+    "error_messages": []
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "confirmed": [
+            "The confirmed field is required."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT /invitations</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of invitation.</td>
+</tr>
+<tr>
+<td>channel_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of channel.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of user.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_31d75fba9d8e9f5591bfb23b779f1371 -->
+<!-- START_bdf4d69a168f9c742e73c1a726d5236a -->
+<h2>Update message</h2>
+<p>[Update current message]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "/messages" \
+    -H "Content-Type: application/json" \
+    -d '{"id":1,"user_id":14,"channel_id":17,"message":"consectetur"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("/messages");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 1,
+    "user_id": 14,
+    "channel_id": 17,
+    "message": "consectetur"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "message": {
+            "id": 1,
+            "message": "Hello World",
+            "channel_id": 1,
+            "user_id": 1,
+            "created_at": null,
+            "updated_at": null
+        }
+    },
+    "error_messages": []
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "message": [
+            "The message field is required."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT /messages</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of message.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of user.</td>
+</tr>
+<tr>
+<td>channel_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Id of channel.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>required</td>
+<td>Message.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_bdf4d69a168f9c742e73c1a726d5236a -->
+<!-- START_440fc4cfa00fcc2e15ab4815f19c1f55 -->
+<h2>Delete channel.</h2>
+<p>[Delete channel when I am creator.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE "/channels" \
+    -H "Content-Type: application/json" \
+    -d '{"id":6,"creator_id":7}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("/channels");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 6,
+    "creator_id": 7
 }
 
 fetch(url, {
@@ -531,7 +746,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"id":2}'
+    -d '{"id":11}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/invitations");
 
@@ -541,7 +756,7 @@ let headers = {
 }
 
 let body = {
-    "id": 2
+    "id": 11
 }
 
 fetch(url, {
@@ -608,7 +823,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"id":1}'
+    -d '{"id":18}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/messages");
 
@@ -618,7 +833,7 @@ let headers = {
 }
 
 let body = {
-    "id": 1
+    "id": 18
 }
 
 fetch(url, {

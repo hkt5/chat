@@ -44,7 +44,7 @@ class DeleteMessageControllerTest extends TestCase
         ];
 
         // when
-        $result = $this->delete('/messages', $data);
+        $result = $this->delete('/channels', $data);
 
         // then
         $result->seeStatusCode(Response::HTTP_OK);

@@ -159,7 +159,7 @@ fetch(url, {
 ```bash
 curl -X POST "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"name":"omnis","creator_id":5}'
+    -d '{"name":"sed","creator_id":11}'
 
 ```
 
@@ -172,8 +172,8 @@ let headers = {
 }
 
 let body = {
-    "name": "omnis",
-    "creator_id": 5
+    "name": "sed",
+    "creator_id": 11
 }
 
 fetch(url, {
@@ -235,7 +235,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"channel_id":7,"user_id":15}'
+    -d '{"channel_id":6,"user_id":10}'
 
 ```
 
@@ -248,8 +248,8 @@ let headers = {
 }
 
 let body = {
-    "channel_id": 7,
-    "user_id": 15
+    "channel_id": 6,
+    "user_id": 10
 }
 
 fetch(url, {
@@ -312,7 +312,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":4,"channel_id":8}'
+    -d '{"user_id":7,"channel_id":15}'
 
 ```
 
@@ -325,8 +325,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 4,
-    "channel_id": 8
+    "user_id": 7,
+    "channel_id": 15
 }
 
 fetch(url, {
@@ -365,98 +365,247 @@ Parameter | Type | Status | Description
 <!-- END_c128c06c497a94b3cf48af3efc7a382f -->
 
 <!-- START_ce903b7ab13a2d1de4efa36802bb3f26 -->
-## /channels
+## Update channel.
+
+[Update current channel.]
+
 > Example request:
 
 ```bash
-curl -X PUT "/channels" 
+curl -X PUT "/channels" \
+    -H "Content-Type: application/json" \
+    -d '{"id":3,"name":"aut","creator_id":20}'
+
 ```
 
 ```javascript
 const url = new URL("/channels");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 3,
+    "name": "aut",
+    "creator_id": 20
 }
 
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "content": {
+        "channel": {
+            "id": 1,
+            "creator_id": 1,
+            "name": "third_channel",
+            "users": null,
+            "created_at": null,
+            "updated_at": "2019-10-15 10:33:28"
+        },
+        "error_messages": null
+    },
+    "0": 200
+}
+```
+> Example response (400):
+
+```json
+{
+    "content": [],
+    "error_messages": {
+        "creator_id": [
+            "The creator id field is required."
+        ]
+    }
+}
+```
 
 ### HTTP Request
 `PUT /channels`
 
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | Id of channel.
+    name | string |  required  | Name of channel.
+    creator_id | integer |  required  | Id of creator.
 
 <!-- END_ce903b7ab13a2d1de4efa36802bb3f26 -->
 
 <!-- START_31d75fba9d8e9f5591bfb23b779f1371 -->
-## /invitations
+## Update invitation.
+
+[Update current invitation.]
+
 > Example request:
 
 ```bash
-curl -X PUT "/invitations" 
+curl -X PUT "/invitations" \
+    -H "Content-Type: application/json" \
+    -d '{"id":1,"channel_id":4,"user_id":19}'
+
 ```
 
 ```javascript
 const url = new URL("/invitations");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 1,
+    "channel_id": 4,
+    "user_id": 19
 }
 
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "content": {
+        "invitation": {
+            "id": 1,
+            "channel_id": 1,
+            "user_id": 2,
+            "confirmed": true,
+            "created_at": null,
+            "updated_at": null
+        }
+    },
+    "error_messages": []
+}
+```
+> Example response (400):
+
+```json
+{
+    "content": [],
+    "error_messages": {
+        "confirmed": [
+            "The confirmed field is required."
+        ]
+    }
+}
+```
 
 ### HTTP Request
 `PUT /invitations`
 
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | Id of invitation.
+    channel_id | integer |  required  | Id of channel.
+    user_id | integer |  required  | Id of user.
 
 <!-- END_31d75fba9d8e9f5591bfb23b779f1371 -->
 
 <!-- START_bdf4d69a168f9c742e73c1a726d5236a -->
-## /messages
+## Update message
+[Update current message]
+
 > Example request:
 
 ```bash
-curl -X PUT "/messages" 
+curl -X PUT "/messages" \
+    -H "Content-Type: application/json" \
+    -d '{"id":1,"user_id":14,"channel_id":17,"message":"consectetur"}'
+
 ```
 
 ```javascript
 const url = new URL("/messages");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 1,
+    "user_id": 14,
+    "channel_id": 17,
+    "message": "consectetur"
 }
 
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "content": {
+        "message": {
+            "id": 1,
+            "message": "Hello World",
+            "channel_id": 1,
+            "user_id": 1,
+            "created_at": null,
+            "updated_at": null
+        }
+    },
+    "error_messages": []
+}
+```
+> Example response (400):
+
+```json
+{
+    "content": [],
+    "error_messages": {
+        "message": [
+            "The message field is required."
+        ]
+    }
+}
+```
 
 ### HTTP Request
 `PUT /messages`
 
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | Id of message.
+    user_id | integer |  required  | Id of user.
+    channel_id | integer |  required  | Id of channel.
+    message | string |  required  | Message.
 
 <!-- END_bdf4d69a168f9c742e73c1a726d5236a -->
 
@@ -470,7 +619,7 @@ fetch(url, {
 ```bash
 curl -X DELETE "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"id":14,"creator_id":4}'
+    -d '{"id":6,"creator_id":7}'
 
 ```
 
@@ -483,8 +632,8 @@ let headers = {
 }
 
 let body = {
-    "id": 14,
-    "creator_id": 4
+    "id": 6,
+    "creator_id": 7
 }
 
 fetch(url, {
@@ -549,7 +698,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"id":2}'
+    -d '{"id":11}'
 
 ```
 
@@ -562,7 +711,7 @@ let headers = {
 }
 
 let body = {
-    "id": 2
+    "id": 11
 }
 
 fetch(url, {
@@ -625,7 +774,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"id":1}'
+    -d '{"id":18}'
 
 ```
 
@@ -638,7 +787,7 @@ let headers = {
 }
 
 let body = {
-    "id": 1
+    "id": 18
 }
 
 fetch(url, {
