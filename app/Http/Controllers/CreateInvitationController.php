@@ -21,6 +21,19 @@ class CreateInvitationController extends Controller
         $this->strategy = $databaseCommandFactory->strategy;
     }
 
+    /**
+     * Create invitation.
+     * [Create new invitation to channel.]
+     *
+     * @bodyParam channel_id int required The id of channel.
+     * @bodyParam user_id int required The id of user.
+     *
+     * @response {"content":{"invitation":{"channel_id":1,"user_id":1,"confirmed":false,"id":1}},"error_messages":[]}
+     *
+     * @response 400 {"content":[],"error_messages":{"user_id":["The user id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The channel id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The selected channel id is invalid."]}}
+     */
     public function create(Request $request) : JsonResponse
     {
 
