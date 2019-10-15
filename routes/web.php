@@ -14,6 +14,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
 $router->get('/channels/{id}', 'FindChannelsController@findById');
 $router->get('/channels/creator/{id}', 'FindChannelsWhenIAmCreatorController@findById');
 $router->get('/invitations/{id}', 'FindInvitationsController@findById');

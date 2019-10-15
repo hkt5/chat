@@ -49,13 +49,19 @@
 <a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
 <!-- END_INFO -->
 <h1>general</h1>
-<!-- START_ea1d9ea5c8f054fcee44df9a4662ca34 -->
-<h2>/channels/creator/{id}</h2>
+<!-- START_a5e4e3b5b5809cb34444d5d13930496d -->
+<h2>Find channels.</h2>
+<p>[Find all channels of user.]</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "/channels/creator/1" </code></pre>
-<pre><code class="language-javascript">const url = new URL("/channels/creator/1");
+<pre><code class="language-bash">curl -X GET -G "/channels/1?id=omnis" </code></pre>
+<pre><code class="language-javascript">const url = new URL("/channels/1");
+
+    let params = {
+            "id": "omnis",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Accept": "application/json",
@@ -68,6 +74,82 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "channels": []
+    },
+    "error_messages": {
+        "error": []
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "error": "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'messenger.invitations' doesn't exist (SQL: select * from `invitations` where `user_id` = 1 and `confirmed` = 1)"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /channels/{id}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>optional</td>
+<td>intenger required Id of user.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_a5e4e3b5b5809cb34444d5d13930496d -->
+<!-- START_ea1d9ea5c8f054fcee44df9a4662ca34 -->
+<h2>Find channels when user is creator.</h2>
+<p>[Find channels when user is creator.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "/channels/creator/1?id=doloribus" </code></pre>
+<pre><code class="language-javascript">const url = new URL("/channels/creator/1");
+
+    let params = {
+            "id": "doloribus",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "channels": []
+    },
+    "error_messages": {
+        "error": []
+    }
+}</code></pre>
 <blockquote>
 <p>Example response (400):</p>
 </blockquote>
@@ -79,14 +161,37 @@ fetch(url, {
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET /channels/creator/{id}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>optional</td>
+<td>integer required Id of user.</td>
+</tr>
+</tbody>
+</table>
 <!-- END_ea1d9ea5c8f054fcee44df9a4662ca34 -->
 <!-- START_de8730e886cfe59641f0501f08beb399 -->
-<h2>/invitations/{id}</h2>
+<h2>Find invitations.</h2>
+<p>[Find invitations for user.]</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "/invitations/1" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "/invitations/1?id=ea" </code></pre>
 <pre><code class="language-javascript">const url = new URL("/invitations/1");
+
+    let params = {
+            "id": "ea",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Accept": "application/json",
@@ -99,6 +204,17 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "invitations": []
+    },
+    "error_messages": {
+        "error": []
+    }
+}</code></pre>
 <blockquote>
 <p>Example response (400):</p>
 </blockquote>
@@ -110,14 +226,37 @@ fetch(url, {
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET /invitations/{id}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>optional</td>
+<td>integer required Id of user.</td>
+</tr>
+</tbody>
+</table>
 <!-- END_de8730e886cfe59641f0501f08beb399 -->
 <!-- START_9a427da468598621f1a2a17113afc46a -->
-<h2>/messages/{id}</h2>
+<h2>Find messages.</h2>
+<p>[Find messages for channel.]</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "/messages/1" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "/messages/1?id=quidem" </code></pre>
 <pre><code class="language-javascript">const url = new URL("/messages/1");
+
+    let params = {
+            "id": "quidem",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Accept": "application/json",
@@ -131,6 +270,19 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">[
+    {
+        "content": {
+            "messages": []
+        },
+        "error_messages": {
+            "error": []
+        }
+    }
+]</code></pre>
+<blockquote>
 <p>Example response (400):</p>
 </blockquote>
 <pre><code class="language-json">{
@@ -141,6 +293,23 @@ fetch(url, {
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET /messages/{id}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>optional</td>
+<td>integer required Id of channel.</td>
+</tr>
+</tbody>
+</table>
 <!-- END_9a427da468598621f1a2a17113afc46a -->
 <!-- START_759c2fb6af86b32ce252441b01a28683 -->
 <h2>Create new channel.</h2>
@@ -150,7 +319,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"name":"sed","creator_id":11}'
+    -d '{"name":"vitae","creator_id":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/channels");
 
@@ -160,8 +329,8 @@ let headers = {
 }
 
 let body = {
-    "name": "sed",
-    "creator_id": 11
+    "name": "vitae",
+    "creator_id": 14
 }
 
 fetch(url, {
@@ -231,7 +400,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"channel_id":6,"user_id":10}'
+    -d '{"channel_id":17,"user_id":11}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/invitations");
 
@@ -241,8 +410,8 @@ let headers = {
 }
 
 let body = {
-    "channel_id": 6,
-    "user_id": 10
+    "channel_id": 17,
+    "user_id": 11
 }
 
 fetch(url, {
@@ -313,7 +482,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":7,"channel_id":15}'
+    -d '{"user_id":9,"channel_id":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/messages");
 
@@ -323,7 +492,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 7,
+    "user_id": 9,
     "channel_id": 15
 }
 
@@ -381,7 +550,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X PUT "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"id":3,"name":"aut","creator_id":20}'
+    -d '{"id":18,"name":"reiciendis","creator_id":17}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/channels");
 
@@ -391,9 +560,9 @@ let headers = {
 }
 
 let body = {
-    "id": 3,
-    "name": "aut",
-    "creator_id": 20
+    "id": 18,
+    "name": "reiciendis",
+    "creator_id": 17
 }
 
 fetch(url, {
@@ -473,7 +642,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X PUT "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"id":1,"channel_id":4,"user_id":19}'
+    -d '{"id":18,"channel_id":1,"user_id":4}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/invitations");
 
@@ -483,9 +652,9 @@ let headers = {
 }
 
 let body = {
-    "id": 1,
-    "channel_id": 4,
-    "user_id": 19
+    "id": 18,
+    "channel_id": 1,
+    "user_id": 4
 }
 
 fetch(url, {
@@ -564,7 +733,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X PUT "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"id":1,"user_id":14,"channel_id":17,"message":"consectetur"}'
+    -d '{"id":6,"user_id":12,"channel_id":15,"message":"dicta"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/messages");
 
@@ -574,10 +743,10 @@ let headers = {
 }
 
 let body = {
-    "id": 1,
-    "user_id": 14,
-    "channel_id": 17,
-    "message": "consectetur"
+    "id": 6,
+    "user_id": 12,
+    "channel_id": 15,
+    "message": "dicta"
 }
 
 fetch(url, {
@@ -662,7 +831,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"id":6,"creator_id":7}'
+    -d '{"id":7,"creator_id":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/channels");
 
@@ -672,8 +841,8 @@ let headers = {
 }
 
 let body = {
-    "id": 6,
-    "creator_id": 7
+    "id": 7,
+    "creator_id": 14
 }
 
 fetch(url, {
@@ -746,7 +915,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"id":11}'
+    -d '{"id":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/invitations");
 
@@ -756,7 +925,7 @@ let headers = {
 }
 
 let body = {
-    "id": 11
+    "id": 14
 }
 
 fetch(url, {
@@ -823,7 +992,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"id":18}'
+    -d '{"id":7}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("/messages");
 
@@ -833,7 +1002,7 @@ let headers = {
 }
 
 let body = {
-    "id": 18
+    "id": 7
 }
 
 fetch(url, {

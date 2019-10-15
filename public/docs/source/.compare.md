@@ -23,16 +23,24 @@ Welcome to the generated API reference.
 #general
 
 
-<!-- START_ea1d9ea5c8f054fcee44df9a4662ca34 -->
-## /channels/creator/{id}
+<!-- START_a5e4e3b5b5809cb34444d5d13930496d -->
+## Find channels.
+
+[Find all channels of user.]
+
 > Example request:
 
 ```bash
-curl -X GET -G "/channels/creator/1" 
+curl -X GET -G "/channels/1?id=omnis" 
 ```
 
 ```javascript
-const url = new URL("/channels/creator/1");
+const url = new URL("/channels/1");
+
+    let params = {
+            "id": "omnis",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
 let headers = {
     "Accept": "application/json",
@@ -48,6 +56,85 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "content": {
+        "channels": []
+    },
+    "error_messages": {
+        "error": []
+    }
+}
+```
+> Example response (400):
+
+```json
+{
+    "content": [],
+    "error_messages": {
+        "error": "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'messenger.invitations' doesn't exist (SQL: select * from `invitations` where `user_id` = 1 and `confirmed` = 1)"
+    }
+}
+```
+
+### HTTP Request
+`GET /channels/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  optional  | intenger required Id of user.
+
+<!-- END_a5e4e3b5b5809cb34444d5d13930496d -->
+
+<!-- START_ea1d9ea5c8f054fcee44df9a4662ca34 -->
+## Find channels when user is creator.
+
+[Find channels when user is creator.]
+
+> Example request:
+
+```bash
+curl -X GET -G "/channels/creator/1?id=doloribus" 
+```
+
+```javascript
+const url = new URL("/channels/creator/1");
+
+    let params = {
+            "id": "doloribus",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "content": {
+        "channels": []
+    },
+    "error_messages": {
+        "error": []
+    }
+}
+```
 > Example response (400):
 
 ```json
@@ -62,19 +149,32 @@ fetch(url, {
 ### HTTP Request
 `GET /channels/creator/{id}`
 
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  optional  | integer required Id of user.
 
 <!-- END_ea1d9ea5c8f054fcee44df9a4662ca34 -->
 
 <!-- START_de8730e886cfe59641f0501f08beb399 -->
-## /invitations/{id}
+## Find invitations.
+
+[Find invitations for user.]
+
 > Example request:
 
 ```bash
-curl -X GET -G "/invitations/1" 
+curl -X GET -G "/invitations/1?id=ea" 
 ```
 
 ```javascript
 const url = new URL("/invitations/1");
+
+    let params = {
+            "id": "ea",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
 let headers = {
     "Accept": "application/json",
@@ -90,6 +190,18 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "content": {
+        "invitations": []
+    },
+    "error_messages": {
+        "error": []
+    }
+}
+```
 > Example response (400):
 
 ```json
@@ -104,19 +216,32 @@ fetch(url, {
 ### HTTP Request
 `GET /invitations/{id}`
 
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  optional  | integer required Id of user.
 
 <!-- END_de8730e886cfe59641f0501f08beb399 -->
 
 <!-- START_9a427da468598621f1a2a17113afc46a -->
-## /messages/{id}
+## Find messages.
+
+[Find messages for channel.]
+
 > Example request:
 
 ```bash
-curl -X GET -G "/messages/1" 
+curl -X GET -G "/messages/1?id=quidem" 
 ```
 
 ```javascript
 const url = new URL("/messages/1");
+
+    let params = {
+            "id": "quidem",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
 let headers = {
     "Accept": "application/json",
@@ -132,6 +257,20 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+[
+    {
+        "content": {
+            "messages": []
+        },
+        "error_messages": {
+            "error": []
+        }
+    }
+]
+```
 > Example response (400):
 
 ```json
@@ -146,6 +285,11 @@ fetch(url, {
 ### HTTP Request
 `GET /messages/{id}`
 
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  optional  | integer required Id of channel.
 
 <!-- END_9a427da468598621f1a2a17113afc46a -->
 
@@ -159,7 +303,7 @@ fetch(url, {
 ```bash
 curl -X POST "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"name":"sed","creator_id":11}'
+    -d '{"name":"vitae","creator_id":14}'
 
 ```
 
@@ -172,8 +316,8 @@ let headers = {
 }
 
 let body = {
-    "name": "sed",
-    "creator_id": 11
+    "name": "vitae",
+    "creator_id": 14
 }
 
 fetch(url, {
@@ -235,7 +379,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"channel_id":6,"user_id":10}'
+    -d '{"channel_id":17,"user_id":11}'
 
 ```
 
@@ -248,8 +392,8 @@ let headers = {
 }
 
 let body = {
-    "channel_id": 6,
-    "user_id": 10
+    "channel_id": 17,
+    "user_id": 11
 }
 
 fetch(url, {
@@ -312,7 +456,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":7,"channel_id":15}'
+    -d '{"user_id":9,"channel_id":15}'
 
 ```
 
@@ -325,7 +469,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 7,
+    "user_id": 9,
     "channel_id": 15
 }
 
@@ -374,7 +518,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PUT "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"id":3,"name":"aut","creator_id":20}'
+    -d '{"id":18,"name":"reiciendis","creator_id":17}'
 
 ```
 
@@ -387,9 +531,9 @@ let headers = {
 }
 
 let body = {
-    "id": 3,
-    "name": "aut",
-    "creator_id": 20
+    "id": 18,
+    "name": "reiciendis",
+    "creator_id": 17
 }
 
 fetch(url, {
@@ -456,7 +600,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PUT "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"id":1,"channel_id":4,"user_id":19}'
+    -d '{"id":18,"channel_id":1,"user_id":4}'
 
 ```
 
@@ -469,9 +613,9 @@ let headers = {
 }
 
 let body = {
-    "id": 1,
-    "channel_id": 4,
-    "user_id": 19
+    "id": 18,
+    "channel_id": 1,
+    "user_id": 4
 }
 
 fetch(url, {
@@ -536,7 +680,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PUT "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"id":1,"user_id":14,"channel_id":17,"message":"consectetur"}'
+    -d '{"id":6,"user_id":12,"channel_id":15,"message":"dicta"}'
 
 ```
 
@@ -549,10 +693,10 @@ let headers = {
 }
 
 let body = {
-    "id": 1,
-    "user_id": 14,
-    "channel_id": 17,
-    "message": "consectetur"
+    "id": 6,
+    "user_id": 12,
+    "channel_id": 15,
+    "message": "dicta"
 }
 
 fetch(url, {
@@ -619,7 +763,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"id":6,"creator_id":7}'
+    -d '{"id":7,"creator_id":14}'
 
 ```
 
@@ -632,8 +776,8 @@ let headers = {
 }
 
 let body = {
-    "id": 6,
-    "creator_id": 7
+    "id": 7,
+    "creator_id": 14
 }
 
 fetch(url, {
@@ -698,7 +842,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"id":11}'
+    -d '{"id":14}'
 
 ```
 
@@ -711,7 +855,7 @@ let headers = {
 }
 
 let body = {
-    "id": 11
+    "id": 14
 }
 
 fetch(url, {
@@ -774,7 +918,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"id":18}'
+    -d '{"id":7}'
 
 ```
 
@@ -787,7 +931,7 @@ let headers = {
 }
 
 let body = {
-    "id": 18
+    "id": 7
 }
 
 fetch(url, {
