@@ -20,6 +20,16 @@ class DeleteInvitationController extends Controller
         $this->strategy = $databaseCommandFactory->strategy;
     }
 
+    /**
+     * Delete invitation.
+     * [Delete current invitation.]
+     *
+     * @bodyParam id integer required Id of invitation.
+     *
+     * @response 200 {"content":{"invitation":{"id":1,"channel_id":1,"user_id":2,"confirmed":0,"created_at":null,"updated_at":null}},"error_messages":[]}
+     * @response 400 {"content":[],"error_messages":{"id":["The id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"id":["The selected id is invalid."]}}
+     */
     public function delete(Request $request) : JsonResponse
     {
 

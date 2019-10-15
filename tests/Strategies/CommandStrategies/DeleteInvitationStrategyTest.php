@@ -1,18 +1,17 @@
 <?php
 
 
-use App\Message;
 use App\Channel;
 use App\Helpers\MockingRequest;
-use App\Strategies\CommandStrategies\DeleteMessageStrategy;
+use App\Invitation;
+use App\Strategies\CommandStrategies\DeleteInvitationStrategy;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\WithoutEvents;
 use Laravel\Lumen\Testing\WithoutMiddleware;
 
-class DeleteMessageTest extends TestCase
+class DeleteInvitationStrategyTest extends TestCase
 {
-
 
     use WithoutEvents;
     use WithoutMiddleware;
@@ -30,17 +29,18 @@ class DeleteMessageTest extends TestCase
         $channel->__set('creator_id', 1);
         $channel->save();
 
-        $message = new Message();
-        $message->__set('id', 1);
-        $message->__set('channel_id', 1);
-        $message->__set('user_id', 1);
-        $message->__set('message', 'Hello world');
-        $message->save();
+        $invitation = new Invitation();
+        $invitation->__set('id', 1);
+        $invitation->__set('channel_id', 1);
+        $invitation->__set('user_id', 2);
+        $invitation->__set('confirmed', false);
+        $invitation->save();
 
-        $this->strategy = new DeleteMessageStrategy();
+        $this->strategy = new DeleteInvitationStrategy();
     }
 
-    public function testDeleteMessage() : void {
+    public function testDeleteInvitationStrategy() : void
+    {
 
         // given
         $data = [
@@ -57,7 +57,8 @@ class DeleteMessageTest extends TestCase
         $this->assertEquals(Response::HTTP_OK, $result->status());
     }
 
-    public function testDeleteMessageWhenIdIsEmpty() : void {
+    public function testDeleteInvitationStrategyWhenIdFieldIsEmpty() : void
+    {
 
         // given
         $data = [
@@ -75,7 +76,8 @@ class DeleteMessageTest extends TestCase
         $this->assertEquals('The id field is required.', $result_data['error_messages']['id']['0']);
     }
 
-    public function testDeleteMessageWhenIdNotExisting() : void {
+    public function testDeleteInvitationStrategyWhenIdNotExisting() : void
+    {
 
         // given
         $data = [

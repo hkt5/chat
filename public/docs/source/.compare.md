@@ -48,24 +48,13 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (400):
 
 ```json
 {
-    "content": {
-        "channels": [
-            {
-                "id": 1,
-                "creator_id": 1,
-                "name": "my-channel",
-                "users": null,
-                "created_at": null,
-                "updated_at": null
-            }
-        ]
-    },
+    "content": [],
     "error_messages": {
-        "error": []
+        "error": "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'messenger.channels' doesn't exist (SQL: select * from `channels` where `creator_id` = 1)"
     }
 }
 ```
@@ -101,15 +90,13 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (400):
 
 ```json
 {
-    "content": {
-        "invitations": []
-    },
+    "content": [],
     "error_messages": {
-        "error": []
+        "error": "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'messenger.invitations' doesn't exist (SQL: select * from `invitations` where `user_id` = 1 and `confirmed` = 0)"
     }
 }
 ```
@@ -145,15 +132,13 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (400):
 
 ```json
 {
-    "content": {
-        "messages": []
-    },
+    "content": [],
     "error_messages": {
-        "error": []
+        "error": "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'messenger.messages' doesn't exist (SQL: select * from `messages` where `channel_id` = 1)"
     }
 }
 ```
@@ -174,7 +159,7 @@ fetch(url, {
 ```bash
 curl -X POST "/channels" \
     -H "Content-Type: application/json" \
-    -d '{"name":"ducimus","creator_id":3}'
+    -d '{"name":"omnis","creator_id":5}'
 
 ```
 
@@ -187,8 +172,8 @@ let headers = {
 }
 
 let body = {
-    "name": "ducimus",
-    "creator_id": 3
+    "name": "omnis",
+    "creator_id": 5
 }
 
 fetch(url, {
@@ -250,7 +235,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "/invitations" \
     -H "Content-Type: application/json" \
-    -d '{"channel_id":20,"user_id":15}'
+    -d '{"channel_id":7,"user_id":15}'
 
 ```
 
@@ -263,7 +248,7 @@ let headers = {
 }
 
 let body = {
-    "channel_id": 20,
+    "channel_id": 7,
     "user_id": 15
 }
 
@@ -327,7 +312,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "/messages" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":10,"channel_id":1}'
+    -d '{"user_id":4,"channel_id":8}'
 
 ```
 
@@ -340,8 +325,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 10,
-    "channel_id": 1
+    "user_id": 4,
+    "channel_id": 8
 }
 
 fetch(url, {
@@ -378,5 +363,333 @@ Parameter | Type | Status | Description
     channel_id | integer |  required  | Id of channel.
 
 <!-- END_c128c06c497a94b3cf48af3efc7a382f -->
+
+<!-- START_ce903b7ab13a2d1de4efa36802bb3f26 -->
+## /channels
+> Example request:
+
+```bash
+curl -X PUT "/channels" 
+```
+
+```javascript
+const url = new URL("/channels");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT /channels`
+
+
+<!-- END_ce903b7ab13a2d1de4efa36802bb3f26 -->
+
+<!-- START_31d75fba9d8e9f5591bfb23b779f1371 -->
+## /invitations
+> Example request:
+
+```bash
+curl -X PUT "/invitations" 
+```
+
+```javascript
+const url = new URL("/invitations");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT /invitations`
+
+
+<!-- END_31d75fba9d8e9f5591bfb23b779f1371 -->
+
+<!-- START_bdf4d69a168f9c742e73c1a726d5236a -->
+## /messages
+> Example request:
+
+```bash
+curl -X PUT "/messages" 
+```
+
+```javascript
+const url = new URL("/messages");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT /messages`
+
+
+<!-- END_bdf4d69a168f9c742e73c1a726d5236a -->
+
+<!-- START_440fc4cfa00fcc2e15ab4815f19c1f55 -->
+## Delete channel.
+
+[Delete channel when I am creator.]
+
+> Example request:
+
+```bash
+curl -X DELETE "/channels" \
+    -H "Content-Type: application/json" \
+    -d '{"id":14,"creator_id":4}'
+
+```
+
+```javascript
+const url = new URL("/channels");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 14,
+    "creator_id": 4
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "content": {
+        "channel": {
+            "id": 1,
+            "creator_id": 1,
+            "name": "my-channel",
+            "users": null,
+            "created_at": null,
+            "updated_at": null
+        }
+    },
+    "error_messages": []
+}
+```
+> Example response (400):
+
+```json
+{
+    "content": [],
+    "error_messages": {
+        "creator_id": [
+            "The selected creator id is invalid."
+        ]
+    }
+}
+```
+
+### HTTP Request
+`DELETE /channels`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | Id of channel.
+    creator_id | integer |  required  | Id of creator.
+
+<!-- END_440fc4cfa00fcc2e15ab4815f19c1f55 -->
+
+<!-- START_c3953ee3f88e9847ef9f5ec6d5438ede -->
+## Delete invitation.
+
+[Delete current invitation.]
+
+> Example request:
+
+```bash
+curl -X DELETE "/invitations" \
+    -H "Content-Type: application/json" \
+    -d '{"id":2}'
+
+```
+
+```javascript
+const url = new URL("/invitations");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 2
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "content": {
+        "invitation": {
+            "id": 1,
+            "channel_id": 1,
+            "user_id": 2,
+            "confirmed": 0,
+            "created_at": null,
+            "updated_at": null
+        }
+    },
+    "error_messages": []
+}
+```
+> Example response (400):
+
+```json
+{
+    "content": [],
+    "error_messages": {
+        "id": [
+            "The selected id is invalid."
+        ]
+    }
+}
+```
+
+### HTTP Request
+`DELETE /invitations`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | Id of invitation.
+
+<!-- END_c3953ee3f88e9847ef9f5ec6d5438ede -->
+
+<!-- START_1e85b5d04200b76d209a2f4df34547c6 -->
+## Delete message
+[Delete current message.]
+
+> Example request:
+
+```bash
+curl -X DELETE "/messages" \
+    -H "Content-Type: application/json" \
+    -d '{"id":1}'
+
+```
+
+```javascript
+const url = new URL("/messages");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 1
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "content": {
+        "message": {
+            "id": 1,
+            "message": "Hello world",
+            "channel_id": 1,
+            "user_id": 1,
+            "created_at": null,
+            "updated_at": null
+        }
+    },
+    "error_messages": []
+}
+```
+> Example response (400):
+
+```json
+{
+    "content": [],
+    "error_messages": {
+        "id": [
+            "The selected id is invalid."
+        ]
+    }
+}
+```
+
+### HTTP Request
+`DELETE /messages`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | Id of message.
+
+<!-- END_1e85b5d04200b76d209a2f4df34547c6 -->
 
 

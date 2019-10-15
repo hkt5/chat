@@ -23,11 +23,11 @@ $router->post('/channels', 'CreateChannelController@create');
 $router->post('/invitations', 'CreateInvitationController@create');
 $router->post('/messages', 'CreateMessageController@create');
 
-$router->put('/channels', 'UpdateChannelController@create');
-$router->put('/invitations', 'UpdateInvitationController@create');
-$router->put('/messages', 'UpdateMessageController@create');
+$router->put('/channels', 'UpdateChannelController@update');
+$router->put('/invitations', 'UpdateInvitationController@update');
+$router->put('/messages', 'UpdateMessageController@update');
 
-$router->delete('/channels', 'DeleteChannelController@create');
-$router->delete('/invitations', 'DeleteInvitationController@create');
-$router->delete('/messages', 'DeleteMessageController@create');
+$router->delete('/channels', 'DeleteChannelController@delete');
+$router->delete('/invitations', 'DeleteInvitationController@delete');
+$router->delete('/messages', 'DeleteMessageController@delete');
 

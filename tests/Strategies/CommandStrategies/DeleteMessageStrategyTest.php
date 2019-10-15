@@ -1,17 +1,18 @@
 <?php
 
 
+use App\Message;
 use App\Channel;
 use App\Helpers\MockingRequest;
-use App\Invitation;
-use App\Strategies\CommandStrategies\DeleteInvitationStrategy;
+use App\Strategies\CommandStrategies\DeleteMessageStrategy;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\WithoutEvents;
 use Laravel\Lumen\Testing\WithoutMiddleware;
 
-class DeleteInvitationTest extends TestCase
+class DeleteMessageStrategyTest extends TestCase
 {
+
 
     use WithoutEvents;
     use WithoutMiddleware;
@@ -29,18 +30,17 @@ class DeleteInvitationTest extends TestCase
         $channel->__set('creator_id', 1);
         $channel->save();
 
-        $invitation = new Invitation();
-        $invitation->__set('id', 1);
-        $invitation->__set('channel_id', 1);
-        $invitation->__set('user_id', 2);
-        $invitation->__set('confirmed', false);
-        $invitation->save();
+        $message = new Message();
+        $message->__set('id', 1);
+        $message->__set('channel_id', 1);
+        $message->__set('user_id', 1);
+        $message->__set('message', 'Hello world');
+        $message->save();
 
-        $this->strategy = new DeleteInvitationStrategy();
+        $this->strategy = new DeleteMessageStrategy();
     }
 
-    public function testDeleteInvitationStrategy() : void
-    {
+    public function testDeleteMessage() : void {
 
         // given
         $data = [
@@ -57,8 +57,7 @@ class DeleteInvitationTest extends TestCase
         $this->assertEquals(Response::HTTP_OK, $result->status());
     }
 
-    public function testDeleteInvitationStrategyWhenIdFieldIsEmpty() : void
-    {
+    public function testDeleteMessageWhenIdIsEmpty() : void {
 
         // given
         $data = [
@@ -76,8 +75,7 @@ class DeleteInvitationTest extends TestCase
         $this->assertEquals('The id field is required.', $result_data['error_messages']['id']['0']);
     }
 
-    public function testDeleteInvitationStrategyWhenIdNotExisting() : void
-    {
+    public function testDeleteMessageWhenIdNotExisting() : void {
 
         // given
         $data = [
