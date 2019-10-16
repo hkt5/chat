@@ -15,7 +15,7 @@ This soulution is a [GPL License](https://en.wikipedia.org/wiki/GNU_General_Publ
 
 ## Shopware Solution
 
-The shopware midleware is here:
+The shopware middleware is here:
 
 ```php
 <?php
