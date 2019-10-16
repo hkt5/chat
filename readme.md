@@ -1,21 +1,18 @@
-# Lumen PHP Framework
+# SilenceOntheWire Lumen Chat implementation
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
-
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
-
+This is a simple interpretation of the chat application for everyone based on the GPL 3.0 license. Code under the GNU GPL license cannot be used in programs based on other licenses.
 ## Official Documentation
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Documentation for the chat microservice can be found on the [https://sleepy-citadel-03985.herokuapp.com/docs/index.html](https://sleepy-citadel-03985.herokuapp.com/docs/index.html).
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this solution, please send an e-mail to Adrian Stolarski at adrian.stolarski@gmail.com. All security vulnerabilities will be promptly addressed.
 
 ## License
 
 This soulution is a [GPL License](https://en.wikipedia.org/wiki/GNU_General_Public_License).
+
+## Comercial usage
+
+If you want to use this software under a commercial license without publishing derivative sources, all you have to do is deposit $ 15 to my paypal account: adrian.stolarski@gmail.com
