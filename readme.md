@@ -13,6 +13,6 @@ If you discover a security vulnerability within this solution, please send an e-
 
 This soulution is a [GPL License](https://en.wikipedia.org/wiki/GNU_General_Public_License).
 
-## Comercial usage
+## Commercial usage
 
 If you want to use this software under a commercial license without publishing derivative sources, all you have to do is deposit $ 15 to my paypal account: adrian.stolarski@gmail.com
