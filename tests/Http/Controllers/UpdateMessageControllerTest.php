@@ -203,4 +203,104 @@ class UpdateMessageControllerTest extends TestCase
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJson($response);
     }
+
+    public function testUpdateMessageWhenIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 'hello',
+            'user_id' => 1,
+            'channel_id' => 1,
+            'message' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'id' => [
+                    '0' => 'The id must be an integer.'
+                ],
+            ],
+        ];
+        // when
+        $result = $this->put('/messages', $data);
+
+        //then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateMessageWhenUserIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'user_id' => 'hello',
+            'channel_id' => 1,
+            'message' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'user_id' => [
+                    '0' => 'The user id must be an integer.'
+                ],
+            ],
+        ];
+        // when
+        $result = $this->put('/messages', $data);
+
+        //then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateMessageWhenChannelIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'user_id' => 1,
+            'channel_id' => 'hello',
+            'message' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'channel_id' => [
+                    '0' => 'The channel id must be an integer.'
+                ],
+            ],
+        ];
+        // when
+        $result = $this->put('/messages', $data);
+
+        //then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateMessageWhenMessageIsNotString() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'user_id' => 1,
+            'channel_id' => 1,
+            'message' => 1,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'message' => [
+                    '0' => 'The message must be a string.'
+                ],
+            ],
+        ];
+        // when
+        $result = $this->put('/messages', $data);
+
+        //then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
 }

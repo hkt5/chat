@@ -29,11 +29,14 @@ class CreateMessageController extends Controller
      * @bodyParam channel_id int required Id of channel.
      * @bodyPAram message string required Chat message.
      *
-     * @reponse 200 {"content":{"message":{"message":"Hello world.","channel_id":1,"user_id":1,"id":1}},"error_messages":[]}
-     * @reponse 400 {"content":[],"error_messages":{"user_id":["The user id field is required."]}}
+     * @response 200 {"content":{"message":{"message":"Hello world.","channel_id":1,"user_id":1,"id":1}},"error_messages":[]}
+     * @response 400 {"content":[],"error_messages":{"user_id":["The user id field is required."]}}
      * @response 400 {"content":[],"error_messages":{"channel_id":["The channel id field is required."]}}
      * @response 400 {"content":[],"error_messages":{"message":["The message field is required."]}}
      * @response 400 {"content":[],"error_messages":{"channel_id":["The selected channel id is invalid."]}}
+     * @response 400 {"content":[],"error_messages":{"user_id":["The user id must be an integer."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The channel id must be an integer."]}}
+     * @response 400 {"content":[],"error_messages":{"message":["The message must be a string."]}}
      */
     public function create(Request $request) : JsonResponse
     {

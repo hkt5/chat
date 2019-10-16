@@ -34,6 +34,9 @@ class CreateChannelController extends Controller
      * @response 400 {"content":[],"error_messages":{"name":["The name has already been taken."]}}
      * @response 400 {"content":[],"error_messages":{"name":["The name field is required."]}}
      * @response 400 {"content":[],"error_messages":{"creator_id":["The creator id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"creator_id":["The creator id must be an integer."]}}
+     * @response 400 {"content":[],"error_messages":{"name":["The name must be a string."]}}
+     *
      */
     public function create(Request $request) : JsonResponse
     {

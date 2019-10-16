@@ -110,4 +110,52 @@ class CreateChannelControllerTest extends TestCase
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJson($response);
     }
+
+    public function testCreateChannelWhenCreatorIdIsNotInteger() : void
+    {
+
+        // given
+        $data =[
+            'name' => 'name',
+            'creator_id' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'creator_id' => [
+                    '0' => 'The creator id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->post('/channels', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testCreateChannelWhenNameIsNotString() : void
+    {
+
+        // given
+        $data = [
+            'creator_id' => 1,
+            'name' => 1,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'name' => [
+                    '0' => 'The name must be a string.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->post('/channels', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
 }

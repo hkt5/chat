@@ -91,4 +91,27 @@ class DeleteInvitationControllerTest extends TestCase
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJson($response);
     }
+
+    public function testDeleteInvitationWhenIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'id' => [
+                    '0' => 'The id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->delete('/invitations', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
 }

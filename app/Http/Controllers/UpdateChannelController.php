@@ -35,6 +35,9 @@ class UpdateChannelController extends Controller
      * @response 400 {"content":[],"error_messages":{"id":["The selected id is invalid."]}}
      * @response 400 {"content":[],"error_messages":{"name":["The name field is required."]}}
      * @response 400 {"content":[],"error_messages":{"creator_id":["The creator id field is required."]}}
+     * @response 400 {"content":[],"error_messages":{"id":["The id must be an integer."]}}
+     * @response 400 {"content":[],"error_message":{"name":["The name must be a string."]}}
+     * @response 400 {"content":[],"error_messages":{"creator_id":["The creator id must be an integer."]}}
      */
     public function update(Request $request) : JsonResponse
     {

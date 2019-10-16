@@ -145,4 +145,79 @@ class UpdateChannelControllerTest extends TestCase
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJson($response);
     }
+
+    public function testUpdateChannelWhenIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 'hello',
+            'name' => 'third_channel',
+            'creator_id' => 1,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'id' => [
+                    '0' => 'The id must be an integer.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->put('/channels', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateChannelWhenNameIsNotString() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'name' => 1,
+            'creator_id' => 1,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'name' => [
+                    '0' => 'The name must be a string.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->put('/channels', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateChannelWhenCreatorIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'name' => 'name',
+            'creator_id' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'creator_id' => [
+                    '0' => 'The creator id must be an integer.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->put('/channels', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
 }

@@ -165,4 +165,70 @@ class UpdateChannelStrategyTest extends TestCase
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
         $this->assertEquals('The creator id field is required.', $result_data['error_messages']['creator_id'][0]);
     }
+
+    public function testUpdateChannelWhenIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'id' => 'hello',
+                'name' => 'third_channel',
+                'creator_id' => 1,
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The id must be an integer.', $result_data['error_messages']['id'][0]);
+    }
+
+    public function testUpdateChannelWhenNameIsNotString() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'id' => 1,
+                'name' => 1,
+                'creator_id' => 1,
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The name must be a string.', $result_data['error_messages']['name'][0]);
+    }
+
+    public function testUpdateChannelWhenCreatorIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'id' => 1,
+                'name' => 'third_channel',
+                'creator_id' => 'hello',
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The creator id must be an integer.', $result_data['error_messages']['creator_id'][0]);
+    }
 }

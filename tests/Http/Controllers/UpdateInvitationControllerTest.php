@@ -202,4 +202,108 @@ class UpdateInvitationControllerTest extends TestCase
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJson($response);
     }
+
+    public function testUpdateInvitationWhenIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 'hello',
+            'channel_id' => 1,
+            'user_id' => 2,
+            'confirmed' => true,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'id' => [
+                    '0' => 'The id must be an integer.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->put('/invitations', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateInvitationWhenChannelIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'channel_id' => 'hello',
+            'user_id' => 2,
+            'confirmed' => true,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'channel_id' => [
+                    '0' => 'The channel id must be an integer.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->put('/invitations', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateInvitationWhenUserIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'channel_id' => 1,
+            'user_id' => 'hello',
+            'confirmed' => true,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'user_id' => [
+                    '0' => 'The user id must be an integer.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->put('/invitations', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testUpdateInvitationWhenConfirmedIsNotBoolean() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'channel_id' => 1,
+            'user_id' => 2,
+            'confirmed' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'confirmed' => [
+                    '0' => 'The confirmed field must be true or false.'
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->put('/invitations', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
 }

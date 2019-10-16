@@ -132,4 +132,50 @@ class DeleteChannelControllerTest extends TestCase
         $result->seeJson($response);
     }
 
+    public function testDeleteChannelWhenCreatorIdIsNotInteger() : void
+    {
+
+        // given
+        $data = [
+            'id' => 1,
+            'creator_id' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'creator_id' => [
+                    '0' => 'The creator id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->delete('/channels', $data);
+
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testDeleteChannelWhenIdIsNotInteger() : void
+    {
+
+        // given
+        $data = [
+            'id' => 'hello',
+            'creator_id' => 1,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'id' => [
+                    '0' => 'The id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->delete('/channels', $data);
+
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
 }

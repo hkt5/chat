@@ -109,4 +109,52 @@ class CreateInvitationControllerTest extends TestCase
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJson($response);
     }
+
+    public function testCreateInvitationWhenChannelIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'channel_id' => 'hello',
+            'user_id' => 1,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'channel_id' => [
+                    '0' => 'The channel id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->post('/invitations', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testCreateInvitationWhenUserIdIsNotInteger() : void
+    {
+
+        // given
+        $data = [
+            'channel_id' => 1,
+            'user_id' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'user_id' => [
+                    '0' => 'The user id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->post('/invitations', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
 }

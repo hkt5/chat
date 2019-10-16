@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(\NunoMaduro\Larastan\LarastanServiceProvider::class);
+        $this->app->instance('path.storage', app()->basePath() . DIRECTORY_SEPARATOR . 'storage');
+        $this->app->instance('path.config', app()->basePath() . DIRECTORY_SEPARATOR . 'config');
     }
 }

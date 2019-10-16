@@ -35,6 +35,8 @@ class CreateInvitationController extends Controller
      * @response 400 {"content":[],"error_messages":{"user_id":["The user id field is required."]}}
      * @response 400 {"content":[],"error_messages":{"channel_id":["The channel id field is required."]}}
      * @response 400 {"content":[],"error_messages":{"channel_id":["The selected channel id is invalid."]}}
+     * @response 400 {"content":[],"error_messages":{"channel_id":["The channel id must be an integer."]}}
+     * @response 400 {"content":[],"error_messages":{"user_id":["The user id must be an integer."]}}
      */
     public function create(Request $request) : JsonResponse
     {

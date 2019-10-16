@@ -94,4 +94,24 @@ class DeleteMessageStrategyTest extends TestCase
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
         $this->assertEquals('The selected id is invalid.', $result_data['error_messages']['id']['0']);
     }
+
+    public function testDeleteMessageWhenIdIsNotInt() : void {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'id' => 'hello',
+            ], 'server' => [], 'cookies' => [],
+            'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The id must be an integer.', $result_data['error_messages']['id']['0']);
+    }
 }

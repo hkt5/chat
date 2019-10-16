@@ -139,4 +139,71 @@ class CreateMessageStrategyTest extends TestCase
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
         $this->assertEquals('The selected channel id is invalid.', $result_data['error_messages']['channel_id']['0']);
     }
+
+    public function testCreateMessageWhenUserIdIsNotInteger() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'channel_id' => 2,
+                'user_id' => 'hello',
+                'message' => 'Hello World',
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The user id must be an integer.', $result_data['error_messages']['user_id'][0]);
+    }
+
+    public function testCreateMessageWhenChannelIdIsNotInteger() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'channel_id' => 'hello',
+                'user_id' => 1,
+                'message' => 'Hello World',
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The channel id must be an integer.', $result_data['error_messages']['channel_id'][0]);
+    }
+
+    public function testCreateMessageWhenMessageIsNotString() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'channel_id' => 2,
+                'user_id' => 1,
+                'message' => 1,
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The message must be a string.', $result_data['error_messages']['message'][0]);
+
+    }
 }

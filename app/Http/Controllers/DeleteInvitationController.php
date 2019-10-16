@@ -31,6 +31,7 @@ class DeleteInvitationController extends Controller
      * @response 200 {"content":{"invitation":{"id":1,"channel_id":1,"user_id":2,"confirmed":0,"created_at":null,"updated_at":null}},"error_messages":[]}
      * @response 400 {"content":[],"error_messages":{"id":["The id field is required."]}}
      * @response 400 {"content":[],"error_messages":{"id":["The selected id is invalid."]}}
+     * @response 400 {"content":[],"error_messages":{"id":["The id must be an integer."]}}
      */
     public function delete(Request $request) : JsonResponse
     {

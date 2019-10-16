@@ -113,4 +113,47 @@ class CreateInvitationStrategyTest extends TestCase
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
         $this->assertEquals('The selected channel id is invalid.', $result_data['error_messages']['channel_id']['0']);
     }
+
+    public function testCreateInvitationWhenChannelIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'user_id' => 1,
+                'channel_id' => 'hello',
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The channel id must be an integer.', $result_data['error_messages']['channel_id']['0']);
+
+    }
+
+    public function testCreateInvitationWhenUserIdIsNotInt() : void
+    {
+
+        // given
+        $data = [
+            'method' => 'post', 'uri' => '/login/email', 'parameters' => [
+                'user_id' => 'hello',
+                'channel_id' => 1,
+            ], 'server' => [], 'cookies' => [], 'files' => [], 'content' => ''
+        ];
+        $request = MockingRequest::createRequest($data);
+
+        // when
+        $result = $this->strategy->command($request);
+        $result_data = json_decode($result->content(), true);
+
+        // then
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->status());
+        $this->assertEquals('The user id must be an integer.', $result_data['error_messages']['user_id']['0']);
+    }
 }

@@ -143,4 +143,79 @@ class CreateMessageControllerTest extends TestCase
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJson($response);
     }
+
+    public function testCreateMessageWhenUserIdIsNotInteger() : void
+    {
+
+        // given
+        $data = [
+            'user_id' => 'hello',
+            'channel_id' => 1,
+            'message' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'user_id' => [
+                    '0' => 'The user id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->post('/messages', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testCreateMessageWhenChannelIdIsNotInteger() : void
+    {
+
+        // given
+        $data = [
+            'user_id' => 1,
+            'channel_id' => 'hello',
+            'message' => 'hello',
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'channel_id' => [
+                    '0' => 'The channel id must be an integer.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->post('/messages', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
+
+    public function testCreateMessageWhenMessageIsNotString() : void
+    {
+
+        // given
+        $data = [
+            'user_id' => 1,
+            'channel_id' => 1,
+            'message' => 1,
+        ];
+        $response = [
+            'content' => [], 'error_messages' => [
+                'message' => [
+                    '0' => 'The message must be a string.',
+                ],
+            ],
+        ];
+
+        // when
+        $result = $this->post('/messages', $data);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeJson($response);
+    }
 }
