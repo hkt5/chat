@@ -1,0 +1,48 @@
+language:
+  - php
+services: docker
+before_install:
+  # Strips out dashes in organization names because they are not allowed in dockerhub
+  - export DOCKER_REPO=`awk -F/ '{gsub("-","",$1)};{print $1"/"$2}' <<<$TRAVIS_REPO_SLUG | tr '[:upper:]' '[:lower:]'`
+  - export IMAGE_SLUG="$TRAVIS_BRANCH.${TRAVIS_COMMIT::8}.${TRAVIS_BUILD_ID}"
+  # Upgrade docker/docker-compose
+  - docker -v
+  - cp .env.example .env
+  # Stop the postgres instance travis sets up automatically
+  - sudo /etc/init.d/postgresql stop
+  # set env vars in the build settings to interact with repositories
+  # see https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker-compose -v
+install:
+  # Install dev php dependencies
+  - docker-compose run --rm fpm composer install --no-interaction --prefer-dist
+  # -- Generate API documentation --
+  # Transclude apib files with Hercule
+  - docker-compose run hercule hercule /var/www/html/resources/docs/api-documentation.apib -o /var/www/html/resources/docs/hercule.apib
+  - docker-compose run aglio mkdir -p /var/www/html/public/docs/v1
+  - docker-compose run aglio aglio --theme-variables streak -i /var/www/html/resources/docs/hercule.apib -o /var/www/html/public/docs/v1/index.html
+script:
+  - docker-compose up -d
+  - sleep 4
+  - docker-compose ps
+  # Ensure phpcs triggers a failing build
+  - docker-compose exec fpm sh -c "vendor/bin/phpcs --config-set ignore_warnings_on_exit 1"
+  # Ensure breaking PSR2 compliance fails in CI
+  - docker-compose exec fpm sh -c "vendor/bin/phpcs --standard=PSR2 --ignore=app/Http/routes.php app"
+  # Seed database
+  - docker-compose exec fpm sh -c "php artisan migrate --seed"
+  # Ensure the api documentation is still accurate
+  - docker-compose run dredd dredd /var/www/html/resources/docs/api-documentation.apib http://web/api/v1
+  # Run tests
+  - docker-compose exec fpm sh -c "vendor/bin/phpunit"
+  # Build cli container
+  - docker build -t "${DOCKER_REPO}:cli" -f infrastructure/cli/Dockerfile .
+  # Remove preconfigured stuff and re-run tests
+  - docker-compose exec fpm sh -c "php artisan clean:template -f"
+  - docker-compose exec fpm sh -c "vendor/bin/phpunit"
+after_success:
+  # Deployable image tags must be in format: [service].[branch].[commit-hash].[timestamp]
+  - if [[ $TRAVIS_PULL_REQUEST = false && ($TRAVIS_BRANCH == 'master' || $TRAVIS_BRANCH == 'staging') ]]; then docker tag "${DOCKER_REPO}:fpm" "${DOCKER_REPO}:fpm.${IMAGE_SLUG}" && docker push "${DOCKER_REPO}:fpm.${IMAGE_SLUG}" ; fi
+  - if [[ $TRAVIS_PULL_REQUEST = false && ($TRAVIS_BRANCH == 'master' || $TRAVIS_BRANCH == 'staging') ]]; then docker tag "${DOCKER_REPO}:cli" "${DOCKER_REPO}:cli.${IMAGE_SLUG}" && docker push "${DOCKER_REPO}:cli.${IMAGE_SLUG}" ; fi
+  - if [[ $TRAVIS_PULL_REQUEST = false && ($TRAVIS_BRANCH == 'master' || $TRAVIS_BRANCH == 'staging') ]]; then docker tag "${DOCKER_REPO}:nginx" "${DOCKER_REPO}:nginx.${IMAGE_SLUG}" && docker push "${DOCKER_REPO}:nginx.${IMAGE_SLUG}" ; fi
