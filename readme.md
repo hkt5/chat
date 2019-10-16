@@ -15,5 +15,4 @@ This soulution is a [GPL License](https://en.wikipedia.org/wiki/GNU_General_Publ
 
 ## Comercial usage
 
-193/5000
 If you want to use this software under a commercial license without publishing derivative sources, all you have to do is deposit $ 15 to my paypal account: adrian.stolarski@gmail.com
