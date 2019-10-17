@@ -14,8 +14,8 @@ class CreateChannelTable extends Migration
     public function up()
     {
         Schema::create('channels', function (Blueprint $table) {
-            $table->bigIncrements('id')->autoIncrement();
-            $table->bigInteger('creator_id')->nullable(false);
+            $table->bigInteger('id')->nullable(false)->autoIncrement();
+            $table->unsignedInteger('creator_id')->nullable(false);
             $table->string('name', 255)->nullable(false)->unique();
             $table->timestamps();
         });
@@ -28,6 +28,7 @@ class CreateChannelTable extends Migration
      */
     public function down()
     {
+
         Schema::dropIfExists('channels');
     }
 }
