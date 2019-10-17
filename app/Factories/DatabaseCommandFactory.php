@@ -7,12 +7,15 @@ namespace App\Factories;
 use App\Strategies\CommandStrategies\CreateChannelStrategy;
 use App\Strategies\CommandStrategies\CreateInvitationStrategy;
 use App\Strategies\CommandStrategies\CreateMessageStrategy;
+use App\Strategies\CommandStrategies\CreateModeratorStrategy;
 use App\Strategies\CommandStrategies\DeleteChannelStrategy;
 use App\Strategies\CommandStrategies\DeleteInvitationStrategy;
 use App\Strategies\CommandStrategies\DeleteMessageStrategy;
+use App\Strategies\CommandStrategies\DeleteModeratorStrategy;
 use App\Strategies\CommandStrategies\UpdateChannelStrategy;
 use App\Strategies\CommandStrategies\UpdateInvitationStrategy;
 use App\Strategies\CommandStrategies\UpdateMessageStrategy;
+use App\Strategies\CommandStrategies\UpdateModeratorStrategy;
 
 class DatabaseCommandFactory implements ImplementsStrategyInterface
 {
@@ -32,6 +35,9 @@ class DatabaseCommandFactory implements ImplementsStrategyInterface
             case DatabaseOperationConstants::CREATE_MESSAGE_STRATEGY:
                 $this->strategy = new CreateMessageStrategy();
                 break;
+            case DatabaseOperationConstants::CREATE_MODERATOR_STRATEGY:
+                $this->strategy = new CreateModeratorStrategy();
+                break;
             case DatabaseOperationConstants::UPDATE_CHANNEL_STRATEGY:
                 $this->strategy = new UpdateChannelStrategy();
                 break;
@@ -41,6 +47,9 @@ class DatabaseCommandFactory implements ImplementsStrategyInterface
             case DatabaseOperationConstants::UPDATE_MESSAGE_STRATEGY:
                 $this->strategy = new UpdateMessageStrategy();
                 break;
+            case DatabaseOperationConstants::UPDATE_MODERATOR_STRATEGY:
+                $this->strategy = new UpdateModeratorStrategy();
+                break;
             case DatabaseOperationConstants::DELETE_CHANNEL_STRATEGY:
                 $this->strategy = new DeleteChannelStrategy();
                 break;
@@ -49,6 +58,9 @@ class DatabaseCommandFactory implements ImplementsStrategyInterface
                 break;
             case DatabaseOperationConstants::DELETE_MESSAGE_STRATEGY:
                 $this->strategy = new DeleteMessageStrategy();
+                break;
+            case DatabaseOperationConstants::DELETE_MODERATOR_STRATEGY:
+                $this->strategy = new DeleteModeratorStrategy();
                 break;
         }
     }

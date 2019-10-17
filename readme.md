@@ -61,4 +61,4 @@ $router->post('/channels', ['uses' => 'CreateChannelController@create', 'middlew
 
 ## Commercial usage
 
-If you want to use this software under a commercial license without publishing derivative sources, all you have to do is deposit $ 15 to my paypal account: adrian.stolarski@gmail.com
+If you want to use this software under a commercial license without publishing derivative sources, all you have to do is deposit $ 15 peer year to my paypal account: adrian.stolarski@gmail.com

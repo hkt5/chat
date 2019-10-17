@@ -14,7 +14,7 @@ class CreateInvitationsTable extends Migration
     public function up()
     {
         Schema::create('invitations', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->autoIncrement();
             $table->bigInteger('channel_id')->nullable(false);
             $table->bigInteger('user_id')->nullable(false);
             $table->boolean('confirmed')->nullable(false)->default(0);

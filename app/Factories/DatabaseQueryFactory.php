@@ -4,6 +4,8 @@
 namespace App\Factories;
 
 
+use App\Strategies\QueryStrategies\FindAllModeratorsByChannelStrategy;
+use App\Strategies\QueryStrategies\FindChannelsByModeratorStrategy;
 use App\Strategies\QueryStrategies\FindChannelsStrategy;
 use App\Strategies\QueryStrategies\FindChannelsWhenIAmCreatorStrategy;
 use App\Strategies\QueryStrategies\FindInvitationsStrategy;
@@ -29,6 +31,12 @@ class DatabaseQueryFactory implements ImplementsStrategyInterface
                 break;
             case DatabaseOperationConstants::FIND_MESSAGES_STRATEGY:
                 $this->strategy = new FindMessagesStrategy();
+                break;
+            case DatabaseOperationConstants::FIND_MODERATORS_BY_CHANNEL_STRATEGY:
+                $this->strategy = new FindAllModeratorsByChannelStrategy();
+                break;
+            case DatabaseOperationConstants::FIND_CHANNELS_BY_MODERATOR_STRATEGY:
+                $this->strategy = new FindChannelsByModeratorStrategy();
                 break;
         }
     }

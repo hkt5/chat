@@ -30,4 +30,9 @@ class Channel extends Model
 
         return $this->hasMany('App\Messages');
     }
+
+    public function moderators() {
+
+        return $this->hasMany('App\Moderator');
+    }
 }
