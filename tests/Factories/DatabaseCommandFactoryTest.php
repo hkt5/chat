@@ -6,12 +6,15 @@ use App\Factories\DatabaseOperationConstants;
 use App\Strategies\CommandStrategies\CreateChannelStrategy;
 use App\Strategies\CommandStrategies\CreateInvitationStrategy;
 use App\Strategies\CommandStrategies\CreateMessageStrategy;
+use App\Strategies\CommandStrategies\CreateModeratorStrategy;
 use App\Strategies\CommandStrategies\DeleteChannelStrategy;
 use App\Strategies\CommandStrategies\DeleteInvitationStrategy;
 use App\Strategies\CommandStrategies\DeleteMessageStrategy;
+use App\Strategies\CommandStrategies\DeleteModeratorStrategy;
 use App\Strategies\CommandStrategies\UpdateChannelStrategy;
 use App\Strategies\CommandStrategies\UpdateInvitationStrategy;
 use App\Strategies\CommandStrategies\UpdateMessageStrategy;
+use App\Strategies\CommandStrategies\UpdateModeratorStrategy;
 
 class DatabaseCommandFactoryTest extends TestCase
 {
@@ -66,6 +69,20 @@ class DatabaseCommandFactoryTest extends TestCase
         $this->assertTrue($instance instanceof CreateMessageStrategy);
     }
 
+    public function testInstanceOfCreateModeratorStrategy() : void
+    {
+
+        // given
+        $constant = DatabaseOperationConstants::CREATE_MODERATOR_STRATEGY;
+
+        // when
+        $this->factory->getInstance($constant);
+        $instance = $this->factory->strategy;
+
+        // then
+        $this->assertTrue($instance instanceof CreateModeratorStrategy);
+    }
+
     public function testInstanceOfUpdateChannelStrategy() : void
     {
 
@@ -108,6 +125,20 @@ class DatabaseCommandFactoryTest extends TestCase
         $this->assertTrue($instance instanceof UpdateMessageStrategy);
     }
 
+    public function testInstanceOfUpdateModeratorStrategy() : void
+    {
+
+        // given
+        $constant = DatabaseOperationConstants::UPDATE_MODERATOR_STRATEGY;
+
+        // when
+        $this->factory->getInstance($constant);
+        $instance = $this->factory->strategy;
+
+        // then
+        $this->assertTrue($instance instanceof UpdateModeratorStrategy);
+    }
+
     public function testInstanceOfDeleteChannelStrategy() : void
     {
 
@@ -148,5 +179,19 @@ class DatabaseCommandFactoryTest extends TestCase
 
         // then
         $this->assertTrue($instance instanceof DeleteMessageStrategy);
+    }
+
+    public function testInstanceOfDeleteModeratorStrategy() : void
+    {
+
+        // given
+        $constant = DatabaseOperationConstants::DELETE_MODERATOR_STRATEGY;
+
+        // when
+        $this->factory->getInstance($constant);
+        $instance = $this->factory->strategy;
+
+        // then
+        $this->assertTrue($instance instanceof DeleteModeratorStrategy);
     }
 }

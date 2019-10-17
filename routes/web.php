@@ -19,16 +19,20 @@ $router->get('/channels/{id}', 'FindChannelsController@findById');
 $router->get('/channels/creator/{id}', 'FindChannelsWhenIAmCreatorController@findById');
 $router->get('/invitations/{id}', 'FindInvitationsController@findById');
 $router->get('/messages/{id}', 'FindMessagesController@findById');
+$router->get('/moderators/{id}', 'FindModeratorsByChannelController@findById');
+$router->get('/moderators/user/{id}', 'FindChannelsByModeratorController@findById');
 
 $router->post('/channels', 'CreateChannelController@create');
 $router->post('/invitations', 'CreateInvitationController@create');
 $router->post('/messages', 'CreateMessageController@create');
+$router->post('/moderators', 'CreateModeratorController@create');
 
 $router->put('/channels', 'UpdateChannelController@update');
 $router->put('/invitations', 'UpdateInvitationController@update');
 $router->put('/messages', 'UpdateMessageController@update');
+$router->put('/moderators', 'UpdateModeratorController@update');
 
 $router->delete('/channels', 'DeleteChannelController@delete');
 $router->delete('/invitations', 'DeleteInvitationController@delete');
 $router->delete('/messages', 'DeleteMessageController@delete');
-
+$router->delete('/moderators', 'DeleteModeratorController@delete');

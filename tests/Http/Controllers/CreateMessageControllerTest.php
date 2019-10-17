@@ -14,8 +14,6 @@ class CreateMessageControllerTest extends TestCase
     use WithoutMiddleware;
     use DatabaseMigrations;
 
-    private $strategy;
-
     public function setUp(): void
     {
         parent::setUp();

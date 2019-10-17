@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChannelTable extends Migration
+class CreateModeratorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateChannelTable extends Migration
      */
     public function up()
     {
-        Schema::create('channels', function (Blueprint $table) {
-            $table->bigIncrements('id')->autoIncrement();
-            $table->bigInteger('creator_id')->nullable(false);
-            $table->string('name', 255)->nullable(false)->unique();
+        Schema::create('moderators', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('channel_id')->nullable(false);
+            $table->bigInteger('user_id')->nullable(false);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateChannelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('channels');
+        Schema::dropIfExists('moderator');
     }
 }
