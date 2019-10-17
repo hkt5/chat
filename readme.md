@@ -59,6 +59,17 @@ And add it to routing in routes/web.php:
 $router->post('/channels', ['uses' => 'CreateChannelController@create', 'middleware' => ['auth']]);
 ```
 
+## Middleware
+
+The current solution uses middlewares:
+
+```php
+$app->middleware([
+     App\Http\Middleware\DBTransaction::class,
+    App\Http\Middleware\LumenCors::class,
+]);
+```
+
 ## Commercial usage
 
 If you want to use this software under a commercial license without publishing derivative sources, all you have to do is deposit $ 15 peer year to my paypal account: adrian.stolarski@gmail.com
