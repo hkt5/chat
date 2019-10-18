@@ -1,4 +1,4 @@
-# SilenceOntheWire Lumen Chat implementation
+# SilenceOnTheWire Lumen Chat implementation
 
 This is a simple interpretation of the chat application for everyone based on the GPL 3.0 license. Code under the GNU GPL license cannot be used in programs based on other licenses.
 
